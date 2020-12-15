@@ -9,4 +9,7 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/signin")
+    public String signin() { return "signin"; }
 }
