@@ -1,13 +1,8 @@
 package com.coal.bond.CoolProject.repository;
 
 import com.coal.bond.CoolProject.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
+public interface UserRepository extends JpaRepository<User, Long> {
 
-public interface UserRepository {
-    User save(User user);
-
-    User findByName(String name);
-
-    ArrayList<User> findAll();
 }
