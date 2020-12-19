@@ -1,4 +1,4 @@
-package com.coal.bond.CoolProject.controller;
+package com.coal.bond.CoolProject.form;
 
 public class UserForm {
     private String name;
