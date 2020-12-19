@@ -46,11 +46,10 @@ public class UserService {
 
     public boolean delete(Long id) {
         final Optional<User> fetchedUser = userRepository.findById(id);
-        if(fetchedUser.isPresent()){
+        if (fetchedUser.isPresent()) {
             userRepository.deleteById(id);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
