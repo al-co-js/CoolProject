@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>list</title>
+    <link rel="stylesheet" href="/css/list.css" />
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.name}"></td>
+          <td th:text="${user.email}"></td>
+          <td><a th:href="@{/user/profile/{id}(id = ${user.id})}">Edit</a></td>
+          <td><a th:href="@{/user/delete/{id}(id = ${user.id})}">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

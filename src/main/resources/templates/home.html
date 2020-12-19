@@ -2,6 +2,7 @@
 <html lang="kr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>home</title>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
@@ -9,14 +10,14 @@
   <body>
     <div class="navList">
       <a href="/" class="navItem">Home</a>
-      <a href="/list" class="navItem">List</a>
-      <a href="/profile" class="navItem">Profile</a>
-      <a th:if="${id.equals('null')}" href="/user/signin" class="navItem"
-        >Sign in</a
-      >
-      <a th:unless="${id.equals('null')}" href="/user/signout" class="navItem"
-        >Sign out</a
-      >
+      <a href="/user/list" class="navItem">List</a>
+      <a th:href="@{/user/profile/{id}(id = ${id})}" class="navItem">Profile</a>
+      <a th:if="${id.equals('null')}" href="/user/signin" class="navItem">
+        Sign in
+      </a>
+      <a th:unless="${id.equals('null')}" href="/user/signout" class="navItem">
+        Sign out
+      </a>
       <a href="/user/signup" class="navItem">Sign up</a>
     </div>
   </body>
