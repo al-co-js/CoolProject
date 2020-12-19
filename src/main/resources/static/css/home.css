@@ -1,0 +1,12 @@
+.navList {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.navItem {
+  font-size: 3rem;
+  margin: auto 0;
+  text-decoration: none;
+  color: black;
+}
