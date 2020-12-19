@@ -15,20 +15,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * User 컨트롤러
+ * 이 class 안에서 모든 Mapping은 '/user' 뒤에 붙는다.
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    /**
+     * JPA User Service
+     */
     private UserService userService;
 
+    /**
+     * UserController initialize.
+     * @param userService JPA User Service
+     */
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * signin 페이지를 렌더링하기 위한 함수.
+     * @return signin 렌더링.
+     */
     @GetMapping("/signin")
     public String signin() {
         return "signin";
     }
 
+    /**
+     * 로그인 처리 함수.
+     * @param userForm form 태그를 통해 전송받는 데이터 형식.
+     * @param response HTTP 응답 변수.
+     * @return 성공 시 Home으로 redirect, 실패 시 signinfail을 렌더링한다.
+     */
     @PostMapping("/signin")
     public String login(UserForm userForm, HttpServletResponse response) {
         List<User> list = userService.list();
@@ -43,11 +64,20 @@ public class UserController {
         return "signinfail";
     }
 
+    /**
+     * signup 페이지를 렌더링하기 위한 함수.
+     * @return signup 렌더링.
+     */
     @GetMapping("/signup")
     public String signup() {
         return "signup";
     }
 
+    /**
+     * 회원가입 처리 함수.
+     * @param userForm form 태그를 통해 전송받는 데이터 형식.
+     * @return Home으로 redirect.
+     */
     @PostMapping("/signup")
     public String register(UserForm userForm) {
         User user = new User();
@@ -58,6 +88,11 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * 로그아웃 처리 함수.
+     * @param response HTTP 응답 변수로 쿠키 삭제를 위함.
+     * @return Home으로 redirect.
+     */
     @GetMapping("/signout")
     public String signout(HttpServletResponse response) {
         Cookie cookie = new Cookie("id", null);
@@ -67,6 +102,11 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * list를 렌더링하기 위한 함수.
+     * @param model list로 데이터를 넘겨주기 위함.
+     * @return list 렌더링.
+     */
     @GetMapping("/list")
     public String list(Model model) {
         List<User> users = userService.list();
@@ -74,6 +114,12 @@ public class UserController {
         return "list";
     }
 
+    /**
+     * profile을 렌더링하기 위한 함수.
+     * @param id PathVariable 형태의 Unique한 id값.
+     * @param model profile로 데이터를 넘겨주기 위함.
+     * @return User가 없다면 Home으로 redirect, 있다면 profile 렌더링.
+     */
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable long id, Model model) {
         Optional<User> user = userService.read(id);
@@ -85,6 +131,12 @@ public class UserController {
         return "profile";
     }
 
+    /**
+     * User 정보 수정 함수.
+     * @param id PathVariable 형태의 Unique한 id값.
+     * @param userForm 수정할 데이터 형태.
+     * @return list 페이지로 redirect.
+     */
     @PostMapping("/edit/{id}")
     public String edit(@PathVariable long id, UserForm userForm) {
         Optional<User> fetchedUser = userService.read(id);
@@ -103,6 +155,11 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * User 삭제 함수.
+     * @param id 삭제할 id
+     * @return list 페이지로 redirect.
+     */
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable long id) {
         userService.delete(id);
