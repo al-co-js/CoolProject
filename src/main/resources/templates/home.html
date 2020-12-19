@@ -1,31 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
     <title>home</title>
-    <style>
-        .navList {
-            display: flex;
-            width: 100%;
-            justify-content: space-around;
-        }
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
 
-        .navItem {
-            font-size: 3rem;
-            margin: auto 0;
-            text-decoration: none;
-            color: black;
-        }
-
-    </style>
-</head>
-<body>
-<div class="navList">
-    <a href="/" class="navItem">Home</a>
-    <a href="/list" class="navItem">List</a>
-    <a href="/profile" class="navItem">Profile</a>
-    <a href="/signin" class="navItem">Sign in</a>
-    <a href="signup" class="navItem">Sign up</a>
-</div>
-</body>
+  <body>
+    <div class="navList">
+      <a href="/" class="navItem">Home</a>
+      <a href="/list" class="navItem">List</a>
+      <a href="/profile" class="navItem">Profile</a>
+      <a th:if="${id.equals('null')}" href="/user/signin" class="navItem"
+        >Sign in</a
+      >
+      <a th:unless="${id.equals('null')}" href="/user/signout" class="navItem"
+        >Sign out</a
+      >
+      <a href="/user/signup" class="navItem">Sign up</a>
+    </div>
+  </body>
 </html>
